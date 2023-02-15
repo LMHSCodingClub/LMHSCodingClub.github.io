@@ -1,7 +1,7 @@
 /* Style the top navigation bar */
 .navbar {
     overflow: hidden; /* Hide overflow */
-    background-color: red; /* Dark background color */
+    background-color: black; /* Dark background color */
   }
   
   /* Style the navigation bar links */
@@ -26,7 +26,12 @@
   }
 
 .title {
-    text-align: center;
-    color: blue;
+    color: purple;
 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
