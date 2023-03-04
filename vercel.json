@@ -11,6 +11,10 @@
         {
             "source": "/:page",
             "destination": "/pages/:page.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/pages/404.html"
         }
     ]
 }
