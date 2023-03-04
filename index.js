@@ -1,6 +1,6 @@
-import http from 'http'
-import fs from 'fs'
-import path from 'path'
+const http = require('http')
+const path = require('path')
+const fs = require('fs')
 
 const __dirname = path.resolve()
 
