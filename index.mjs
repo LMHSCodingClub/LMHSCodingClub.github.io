@@ -1,43 +1,78 @@
-import * as http from 'node:http'
-import * as fs from 'node:fs'
-import * as path from 'node:path'
+import http from 'http'
+import fs from 'fs'
+import path from 'path'
 
-const PORT = 3000
+const __dirname = path.resolve()
 
-const MIME_TYPES = {
-    default: 'application/octet-stream',
-    html: 'text/html; charset=UTF-8',
-    js: 'application/javascript',
-    css: 'text/css',
-    png: 'image/png',
-    jpg: 'image/jpg',
-    gif: 'image/gif',
-    ico: 'image/x-icon',
-    svg: 'image/svg+xml',
-}
+const server = http.createServer((req, res) => {
+    let filePath = path.join(__dirname, req.url === '/' ? 'pages/index.html' : req.url);
+    const extname = path.extname(filePath);
+    let contentType = 'text/html';
 
-const STATIC_PATH = path.join(process.cwd(), './')
+    switch (extname) {
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.css':
+            contentType = 'text/css';
+            break;
+        case '.json':
+            contentType = 'application/json';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.jpg':
+            contentType = 'image/jpg';
+            break;
+        case '.wav':
+            contentType = 'audio/wav';
+            break;
+        case '.svg':
+            contentType = 'image/svg+xml';
+            break;
+        case '.mp4':
+            contentType = 'video/mp4';
+            break;
+    }
 
-const prepareFile = async (url) => {
-    const paths = [STATIC_PATH, url]
-    if (url.endsWith('/')) paths.push('index.html')
-    const filepath = path.join(...paths)
-    const pathTraversal = !filepath.startsWith(STATIC_PATH)
-    const exists = await fs.promises.access(filepath).then(() => true, () => false)
-    const found = !pathTraversal && exists;
-    const streamPath = found ? filepath : STATIC_PATH + '/404.html'
-    const ext = path.extname(streamPath).substring(1).toLowerCase()
-    const stream = fs.createReadStream(streamPath)
-    return { found, ext, stream }
-}
+    fs.readFile(filePath, (error, content) => {
+        if (error) {
+            if (error.code === 'ENOENT') {
+                // File not found, try to serve corresponding html file
+                filePath = path.join(__dirname, 'pages', req.url + '.html');
+                fs.readFile(filePath, (error, content) => {
+                    if (error) {
+                        if (error.code === 'ENOENT') {
+                            // File not found, send 404
+                            res.writeHead(404, { 'Content-Type': 'text/html' });
+                            res.end('<h1>404 Not Found</h1>');
+                        } else {
+                            // Some other error, send 500
+                            res.writeHead(500);
+                            res.end(`Server Error: ${error.code}`);
+                        }
+                    } else {
+                        // Found corresponding html file, send content
+                        res.writeHead(200, { 'Content-Type': 'text/html' });
+                        res.end(content, 'utf-8');
+                    }
+                });
+            } else {
+                // Some other error, send 500
+                res.writeHead(500);
+                res.end(`Server Error: ${error.code}`);
+            }
+        } else {
+            // Found file, send content
+            res.writeHead(200, { 'Content-Type': contentType });
+            res.end(content, 'utf-8');
+        }
+    });
+});
 
-http.createServer(async (req, res) => {
-    const file = await prepareFile(req.url)
-    const statusCode = file.found ? 200 : 404
-    const mimeType = MIME_TYPES[file.ext] || MIME_TYPES.default;
-    res.writeHead(statusCode, { 'Content-Type': mimeType })
-    file.stream.pipe(res);
-    console.log(`${req.method} ${req.url} ${statusCode}`)
-}).listen(PORT)
+const PORT = process.env.PORT || 3000;
 
-console.log(`Server tunning at http://localhost:${PORT}`)
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
