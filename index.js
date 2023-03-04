@@ -5,16 +5,16 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(async (req, res) => {
-    let fileUrl = req.url === '/' ? '/index.html' : req.url;
+    let fileUrl = req.url === '/' ? '/pages/index.html' : req.url;
     const ext = path.extname(fileUrl);
     let contentType = 'text/html';
-    let filePath = path.join(__dirname, 'public', fileUrl);
+    let filePath = path.join(__dirname, fileUrl);
 
     if (!ext) {
         filePath += '.html';
         fileUrl += '.html';
     } else {
-        contentType = `text/${ext.substr(1)}`;
+        contentType = `text/${ext.substring(1)}`;
     }
 
     try {
