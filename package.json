@@ -1,0 +1,22 @@
+{
+  "name": "lmhscodingclub-website",
+  "version": "1.0.0",
+  "description": "The ongoing archive of Lower Moreland High School Coding Club",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LMHSCodingClub/LMHSCodingClub.github.io.git"
+  },
+  "keywords": [
+    "club"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LMHSCodingClub/LMHSCodingClub.github.io/issues"
+  },
+  "homepage": "https://github.com/LMHSCodingClub/LMHSCodingClub.github.io#readme"
+}
