@@ -2,8 +2,6 @@ const http = require('http')
 const path = require('path')
 const fs = require('fs')
 
-const __dirname = path.resolve()
-
 const server = http.createServer((req, res) => {
     let filePath = path.join(__dirname, req.url === '/' ? 'pages/index.html' : req.url);
     const extname = path.extname(filePath);
