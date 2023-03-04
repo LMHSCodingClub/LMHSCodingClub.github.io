@@ -1,41 +1,69 @@
 /* Style the top navigation bar */
 .navbar {
-    overflow: hidden; /* Hide overflow */
-    background-color: black; /* Dark background color */
-  }
-  
-  /* Style the navigation bar links */
-  .navbar a {
-    float: left; /* Make sure that the links stay side-by-side */
-    display: block; /* Change the display to block, for responsive reasons (see below) */
-    color: white; /* White text color */
-    text-align: center; /* Center the text */
-    padding: 14px 20px; /* Add some padding */
-    text-decoration: none; /* Remove underline */
-  }
-  
-  /* Right-aligned link */
-  .navbar a.right {
-    float: right; /* Float a link to the right */
-  }
-  
-  /* Change color on hover/mouse-over */
-  .navbar a:hover {
-    background-color: #ddd; /* Grey background color */
-    color: black; /* Black text color */
-  }
+  overflow: hidden;
+  /* Hide overflow */
+  background-color: black;
+  /* Dark background color */
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  /* Make sure that the links stay side-by-side */
+  display: block;
+  /* Change the display to block, for responsive reasons (see below) */
+  color: white;
+  /* White text color */
+  text-align: center;
+  /* Center the text */
+  padding: 14px 20px;
+  /* Add some padding */
+  text-decoration: none;
+  /* Remove underline */
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+  /* Float a link to the right */
+}
+
+/* Change color on hover/mouse-over */
+.navbar a:hover {
+  background-color: #ddd;
+  /* Grey background color */
+  color: black;
+  /* Black text color */
+}
 
 .title {
-    color: purple;
+  color: purple;
 
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#metrics {
+  display: flex;
+}
+
+#metrics div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+  font-size: 2em;
+
+}
+
+#metrics img {
+  height: 75px;
 }
