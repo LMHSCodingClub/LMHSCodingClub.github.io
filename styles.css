@@ -53,6 +53,13 @@ body {
 
 #metrics {
   display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 800px) {
+  #metrics {
+    flex-direction: row;
+  }
 }
 
 #metrics div {
@@ -61,7 +68,6 @@ body {
   align-items: center;
   margin: 1em;
   font-size: 2em;
-
 }
 
 #metrics img {
