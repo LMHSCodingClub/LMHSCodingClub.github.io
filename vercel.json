@@ -1,0 +1,20 @@
+{
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/pages/index.html"
+        },
+        {
+            "source": "/:file.:ext",
+            "destination": "/:file.:ext"
+        },
+        {
+            "source": "/:page",
+            "destination": "/pages/:page.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/pages/404.html"
+        }
+    ]
+}
