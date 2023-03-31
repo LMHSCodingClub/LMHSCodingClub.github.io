@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/",
-            "destination": "https://www.youtube.com/@jailbreakwithjolly856"
+            "destination": "/pages/index.html"
         },
         {
             "source": "/:file.:ext",
